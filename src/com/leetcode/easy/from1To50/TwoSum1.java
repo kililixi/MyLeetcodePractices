@@ -6,6 +6,10 @@ import java.util.Map;
 
 /**
  * https://leetcode.com/problems/two-sum/
+ * 给一组数字和一个target，返回两个加起来等于target的数字，假定只有一个结果，并且同一个数字不能用两次。
+ *
+ * 使用哈希表，循环的时候把 target-当前值 作为key, 下标作为 value；如果 下次循环时的 (target-当前值)存在于哈希表中，则根据下标(value)取对应的值
+ *
  */
 public class TwoSum1 {
     public static int[] twoSum(int[] nums, int target) {
