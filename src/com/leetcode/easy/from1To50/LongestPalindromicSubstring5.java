@@ -75,18 +75,54 @@ public class LongestPalindromicSubstring5 {
         return result;
     }
 
+    /**
+     * 以一个或两个字符串为中心，判断中心左右两边同等位置的字符串是否一致，然后不断向外
+     * 如 'abba'
+     *
+     * 1、 i=0 先判断a是不是，是，长度为1。 记录为设为1, 开始结尾为0,0
+     *    判断ab是不是，不是，长度为0  小于1
+     * 2、 i=1 判断b是不是，是；继续，左右字符为ab，不是回文。长度为1。 还是<=1 ，忽略。
+     *     判断bb 是不是，是，继续，左右字符为aa，是回文。长度为4, 记录为4，下标为0,3
+     * 3、 i=2 判断b是不是，是；继续，左右字符为ba，不是回文。长度为1。 还是<=1 ，忽略
+     *      判断ba, 是不是，不是。 略过
+     * 4、 i=3 判断a是不是，是，长度为1。 忽略
+     *
+     * 最后取下标为[0,3] 截取 [0,4)
+     * @param s
+     * @return
+     */
+    public static String longestPalindrome3(String s) {
+        if (s == null || s.length() < 1) return "";
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private static int expandAroundCenter(String s, int left, int right) {
+        int L = left, R = right;
+        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L--;
+            R++;
+        }
+        return R - L - 1;
+    }
+
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
 //        String s = "cbbd";
-        String s = "abacdfgdcaba";
+//        String s = "abacdfgdcaba";
 //        String s = "euazbipzncptldueeuechubrcourfpftcebikrxhybkymimgvldiwqvkszfycvqyvtiwfckexmowcxztkfyzqovbtmzpxojfofbvwnncajvrvdbvjhcrameamcfmcoxryjukhpljwszknhiypvyskmsujkuggpztltpgoczafmfelahqwjbhxtjmebnymdyxoeodqmvkxittxjnlltmoobsgzdfhismogqfpfhvqnxeuosjqqalvwhsidgiavcatjjgeztrjuoixxxoznklcxolgpuktirmduxdywwlbikaqkqajzbsjvdgjcnbtfksqhquiwnwflkldgdrqrnwmshdpykicozfowmumzeuznolmgjlltypyufpzjpuvucmesnnrwppheizkapovoloneaxpfinaontwtdqsdvzmqlgkdxlbeguackbdkftzbnynmcejtwudocemcfnuzbttcoew";
-//        [9, 11]
-//
-//        [12 - 11 - 1, 12 - 9 -1]
-//        [0, 2]
 //                 "abacdgfdcaba"
-//        String s = "babad";
-        System.out.println(longestPalindrome2(s));
+        String s = "abba";
+        System.out.println(longestPalindrome3(s));
         System.out.println(System.currentTimeMillis() - start );
     }
 }
