@@ -3,10 +3,26 @@ package com.leetcode.easy.from1To50;
 /**
  * https://leetcode.com/problems/add-two-numbers/
  *
- *
+ * 给定两个非空的链表代表两组非负的整数，数字方向存储，比如 2 -> 4 -> 3 代表 342.返回两组数字相加后的结果。
+ * Input: l1 = [2,4,3], l2 = [5,6,4]
+ * Output: [7,0,8]
+ * Explanation: 342 + 465 = 807.
  */
 public class AddTwoNumbers2 {
-    // TODO 采用递归来调用
+
+    /**
+     * 思路： 把结果也当初一个链表，然后把两个链表相同位的数据相加，把结果赋给结果链表，如果有进位就+1
+     *
+     * 链表的结构，可以获取下一个节点的值，所以：
+     * 1 先定义结果链表开始的点位
+     * 2 循环处理 l1 和 l2 ，跳出条件为两个节点都是空
+     * 3 获取 l1 和 l2 的当前值，如果其中一个是null，当作0
+     * 4 两个相加，判断是否有进位标志，如果有，结果加1. 把 结果 % 10 的余数赋给当前结果链表.
+     * 5 把l1 l2 指向下一个各自的节点， 如果上一步的结果大于等于10，标上进位标志，并判断双方是否为空，如果都为空，给结果链表加一个进位的节点，值为1，然后返回。如果不都为空，则给结果链表加一个进位的节点，值为0，继续循环。
+     * @param l1
+     * @param l2
+     * @return
+     */
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
         ListNode curr = new ListNode(0);
@@ -36,11 +52,14 @@ public class AddTwoNumbers2 {
             l1 = l1 == null ? null : l1.next;
             l2 = l2 == null ? null : l2.next;
 
-            // 如果结果大于10，并且l1和l2后续都没有节点了，需要手动增加一个节点，以便开始下一个循环
+            // 如果结果大于10，并且l1和l2后续都没有节点了，给结果链表加一个进位节点，值为1,返回
             if(result >= 10) {
                 flag = true;
                 if(l1 == null && l2 == null) {
-                    l1 = new ListNode(0);
+//                    l1 = new ListNode(0);
+                    ListNode next = new ListNode(1);
+                    curr.next = next;
+                    return resultNode;
                 }
             }
 
@@ -132,41 +151,41 @@ public class AddTwoNumbers2 {
     }
 
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(2);
-        ListNode l2 = new ListNode(4);
-        ListNode l3 = new ListNode(3);
-        l1.next = l2;
-        l2.next = l3;
-
-        ListNode p1 = new ListNode(5);
-        ListNode p2 = new ListNode(6);
-        ListNode p3 = new ListNode(4);
-        p1.next = p2;
-        p2.next = p3;
-
-//        ListNode l1 = new ListNode(9);
-//        ListNode l2 = new ListNode(9);
-//        ListNode l3 = new ListNode(9);
-//        ListNode l4 = new ListNode(9);
-//        ListNode l5 = new ListNode(9);
-//        ListNode l6 = new ListNode(9);
-//        ListNode l7 = new ListNode(9);
+//        ListNode l1 = new ListNode(2);
+//        ListNode l2 = new ListNode(4);
+//        ListNode l3 = new ListNode(3);
 //        l1.next = l2;
 //        l2.next = l3;
-//        l3.next = l4;
-//        l4.next = l5;
-//        l5.next = l6;
-//        l6.next = l7;
 //
-//        ListNode p1 = new ListNode(9);
-//        ListNode p2 = new ListNode(9);
-//        ListNode p3 = new ListNode(9);
-//        ListNode p4 = new ListNode(9);
+//        ListNode p1 = new ListNode(5);
+//        ListNode p2 = new ListNode(6);
+//        ListNode p3 = new ListNode(4);
 //        p1.next = p2;
 //        p2.next = p3;
-//        p3.next = p4;
+
+        ListNode l1 = new ListNode(9);
+        ListNode l2 = new ListNode(9);
+        ListNode l3 = new ListNode(9);
+        ListNode l4 = new ListNode(9);
+        ListNode l5 = new ListNode(9);
+        ListNode l6 = new ListNode(9);
+        ListNode l7 = new ListNode(9);
+        l1.next = l2;
+        l2.next = l3;
+        l3.next = l4;
+        l4.next = l5;
+        l5.next = l6;
+        l6.next = l7;
+
+        ListNode p1 = new ListNode(9);
+        ListNode p2 = new ListNode(9);
+        ListNode p3 = new ListNode(9);
+        ListNode p4 = new ListNode(9);
+        p1.next = p2;
+        p2.next = p3;
+        p3.next = p4;
 //
-        ListNode curr = addTwoNumbers2(l1, p1);
+        ListNode curr = addTwoNumbers(l1, p1);
         while(curr != null) {
             System.out.println("value: " + curr.val);
             curr = curr.next;
