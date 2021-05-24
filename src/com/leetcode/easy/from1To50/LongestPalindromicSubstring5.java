@@ -54,6 +54,7 @@ public class LongestPalindromicSubstring5 {
      * @param s
      * @return
      */
+    // 因为indexOf的原因，复杂度也是 O(n^3)
     public static String longestPalindrome2(String s) {
         String reverseStr = new StringBuffer(s).reverse().toString();
         int n = s.length();
@@ -62,7 +63,7 @@ public class LongestPalindromicSubstring5 {
         for (int i = 0; i < n; i++)
             for (int j = i + 1; j <= n; j++) {
                 String tempStr = s.substring(i, j);
-                int index = reverseStr.indexOf(tempStr);
+                int index = reverseStr.indexOf(tempStr); // indexof 复杂度也是 O(n)
                 // 为什么 这边-1, 因为是下标，当 abacdfgdcaba 到后面的 'aba' 时，下标应该是[9, 11], 但是j是12，因为substr是[)的关系。
                 if( index == (n - (j-1) - 1)) {
                     if(tempStr.length() > max) {
