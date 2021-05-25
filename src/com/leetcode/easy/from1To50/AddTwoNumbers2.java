@@ -75,6 +75,12 @@ public class AddTwoNumbers2 {
 
     }
 
+    /**
+     * 类似第一个方法，只是把最后计算进位的方法放到while循环外，因为while循环的跳出条件就是 l1 和 l2为Null，没必要在循环体内一直判断
+     * @param l1
+     * @param l2
+     * @return
+     */
     public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
 
         ListNode curr = new ListNode(0);
@@ -126,6 +132,15 @@ public class AddTwoNumbers2 {
 
     /**
      * official
+     *
+     * 解法都差不多，这里把进位保留，留到下一位相加时再使用
+     * 比如 第一位分别是 l1 = [6,4,3], l2 = [5,6,4] 第一次 6 + 5 时，进位(carry=0),但是相加后carry 为 (6 + 5) / 10 = 1 ,余 1
+     * 第二位相加时再使用这个carry, 就是 carry + 4 + 6 = 11 , 此时carry 是 11 /10 = 1， 余 1
+     * 第三次是 carry + 3 + 4 = 8 ， carry 为0
+     * 循环结束后， 判断carry ，如果大于 0 ，再进一位
+     *
+     *
+     * ，最终结果 811
      * @param l1
      * @param l2
      * @return
