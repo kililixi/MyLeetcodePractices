@@ -79,7 +79,7 @@ public class LengthOfLongestSubstring3 {
                 set.remove(s.charAt(i++));
             } else {
                 set.add(s.charAt(j++));
-                count = Math.max(count, j-i);
+                count = Math.max(count, j-i); // 上面一步已经对 j ++ 了
             }
         }
 
@@ -95,13 +95,17 @@ public class LengthOfLongestSubstring3 {
      *
      * 对字符数组进行循环，
      * 循环体中：
-     * 如果map中存在对应的字符，判断下标是否
+     * 如果map中存在对应的字符，说明有重复，判断是否 >=start(再从小于start的下标开始计算，没有意义)
      *
+     * 如果大于等于，则从 （该下标 + 1） 作为新的开始位置，比如 abcbacdb , 当进行到第二个b(3)时，应该从 第一个b的下标 (1) + 1 的 c开始
+     *
+     * 当前长度为 i - start + 1 ，比如上面的例子 时 cb
+     * 进行 len = Math.max(len, i-start + 1 )的操作
      *
      * @param s
      * @return
      */
-    public int lengthOfLongestSubstring3(String s) {
+    public static int lengthOfLongestSubstring3(String s) {
 
         Map<Character, Integer> map= new HashMap<>();
         int start=0, len=0;
@@ -110,6 +114,7 @@ public class LengthOfLongestSubstring3 {
         for(int i=0; i<s.length(); i++) {
             char c = s.charAt(i);
             if (map.containsKey(c)) {
+                //
                 if (map.get(c) >= start)
                     start = map.get(c) + 1;
             }
@@ -126,17 +131,19 @@ public class LengthOfLongestSubstring3 {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        String input = "abcabcbb";
+        String input = "abcbacdb";
+//        String input = "abba";
 //        String input = "abcdbc";
 //        String input = "dvdf";
 //        String input = "bbbbbb";
 //        String input = "pwwkew";
-        System.out.println(lengthOfLongestSubstring2(input));
+        System.out.println(lengthOfLongestSubstring3(input));
         System.out.println(System.currentTimeMillis() - start );
     }
 
     /**
      * 即使是暴力循环，速度也比写的快
+     *
      * official
      * Brute force
      * @param s
@@ -147,11 +154,16 @@ public class LengthOfLongestSubstring3 {
         int ans = 0;
         for (int i = 0; i < n; i++)
             for (int j = i + 1; j <= n; j++)
-                if (allUnique(s, i, j))
+                if (allUnique(s, i, j))  // 判断s从i 到 j 是否有重复，都没有重复就计算长度
                     ans = Math.max(ans, j - i);
         return ans;
     }
 
+    /**
+     * 类似 lengthOfLongestSubstring2
+     * @param s
+     * @return
+     */
     public static int lengthOfLongestSubstringOfficial2(String s) {
         int n = s.length();
         Set<Character> set = new HashSet<>();
@@ -169,6 +181,13 @@ public class LengthOfLongestSubstring3 {
         return ans;
     }
 
+    /**
+     * 判断给定的字符串s ,从 start 到 end ，是否没有重复的
+     * @param s
+     * @param start
+     * @param end
+     * @return
+     */
     public static boolean allUnique(String s, int start, int end) {
         System.out.println(s.substring(start, end));
         Set<Character> set = new HashSet<>();
