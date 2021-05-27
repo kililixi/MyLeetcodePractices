@@ -5,7 +5,25 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * https://leetcode.com/problems/longest-substring-without-repeating-characters/
+ *
+ * 给定一个字符串，找出最长的不重复的段落
+ */
 public class LengthOfLongestSubstring3 {
+
+    /**
+     * 时间复杂度： O(n^2)
+     * 将字符串分解成字符数组
+     * 定义一个字符串作为当前最长的不重复字符串 str ，当前不重复次数 count, 最大的不重复个数 max; 开始循环数组
+     * 循环体中，通过 indexOf 判断当前字符在不在str中。
+     * 如果不在，则把count+1,并把字符加到str末尾，并把 max 赋值 Math.max(max, count)；
+     * 如果存在，则 str从下标为当前char开始截取，再加上当前char: str.substring(index +1) + chary[i] ，count = len(str)
+     * // 比如 str = abc, 当前循环的char是b ,那新的str应该是 cb
+     * 知道循环结束
+     * @param s
+     * @return
+     */
     public static int lengthOfLongestSubstring(String s) {
         int count = 0;
         int max = 0;
@@ -32,6 +50,22 @@ public class LengthOfLongestSubstring3 {
         return max;
     }
 
+    /**
+     * 假设没有重复的字段在str的开始和结束的下标分别为 i 和 j, 初始为0；当前最大长度count 为 0；
+     * XXXXXXXX
+     * ij
+     *
+     * 再用set来保证，字符只有一个
+     *
+     * while 循环，终止条件为下标i或j达到str的长度为止
+     * 循环体中，先移动右边的下标(j), 判断字符是否在set中，如果不存在，则将右边的下标对应的字符加入set中，并向右移动1位（j++）,计算 Math.max(count, j-i),赋值给count
+     * 如果存在，则从set中移除左边下标对应的值。 左边的下标向右移动(i++)。
+     *
+     * 相当于向右( i 到 j 的区间内)平移
+     *
+     * @param s
+     * @return
+     */
     public static int lengthOfLongestSubstring2(String s) {
         if(s == null || "".equals(s)) {
             return 0;
@@ -52,6 +86,21 @@ public class LengthOfLongestSubstring3 {
         return count;
     }
 
+    /**
+     * 思路：
+     * 记录字符出现的下标位置，当下次发现相同的字符时，直接从上一个相同字符的位置开始计算
+     *
+     * 定义 当前开始位置 start, 以及不重复长度len ，都为0
+     * 定义HashMap , 保存下标出现的位置
+     *
+     * 对字符数组进行循环，
+     * 循环体中：
+     * 如果map中存在对应的字符，判断下标是否
+     *
+     *
+     * @param s
+     * @return
+     */
     public int lengthOfLongestSubstring3(String s) {
 
         Map<Character, Integer> map= new HashMap<>();
