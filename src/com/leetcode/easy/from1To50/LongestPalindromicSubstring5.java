@@ -1,5 +1,10 @@
 package com.leetcode.easy.from1To50;
 
+/**
+ * https://leetcode.com/problems/longest-palindromic-substring/
+ *
+ * 给定一个字符串，返回最长的回文
+ */
 public class LongestPalindromicSubstring5 {
 
     private static int count;
@@ -23,7 +28,14 @@ public class LongestPalindromicSubstring5 {
         System.out.println(count);
         return result;
     }
-    
+
+    /**
+     * 是否是回文
+     * @param s
+     * @param start
+     * @param end
+     * @return
+     */
     public static boolean isPalind(String s, int start, int end) {
         count ++;
         String tempStr = s.substring(start, end);
@@ -40,6 +52,13 @@ public class LongestPalindromicSubstring5 {
     }
 
     /**
+     * 思路：
+     * 假设 t 是 字符串s的一个回文子字符串，下标是[start, end].
+     * 假设 s' 是字符串的反转字符串
+     *
+     * 那么 t在 s 的下标与 t在 s'的下标会有一定关系.
+     *
+     *
      * Let's say, t is a substring in string s which lies at indices : [start, end].
      * Let's say, s' is reversed string of s.
      * then t' which is reverse of t lies in s' at indices : [L-end-1, L-start-1]
@@ -99,8 +118,8 @@ public class LongestPalindromicSubstring5 {
             int len2 = expandAroundCenter(s, i, i + 1);
             int len = Math.max(len1, len2);
             if (len > end - start) {
-                start = i - (len - 1) / 2;
-                end = i + len / 2;
+                start = i - (len - 1) / 2;  // 以i 为中心，长度为 len , 所以 对于开始下标来说，是 i- (len -1 ) /2 (为什么-1)
+                end = i + len / 2;  // 以i 为中心，长度为 len , 所以 对于结束下标来说，是 i + len /2
             }
         }
         return s.substring(start, end + 1);
@@ -112,7 +131,35 @@ public class LongestPalindromicSubstring5 {
             L--;
             R++;
         }
-        return R - L - 1;
+        return R - L - 1; // -1 是因为在跳出循环之前，已经对 L 和 R 进行操作了
+    }
+
+    public static String longestPalindrome4(String s) {
+        if (s == null || s.length() < 1) return "";
+        int start = 0, end = 0;
+        String max = "";
+        for (int i = 0; i < s.length(); i++) {
+            String len1 = expandAroundCenter2(s, i, i);
+            String len2 = expandAroundCenter2(s, i, i + 1);
+
+            if(len1.length() < len2.length()) {
+                len1 = len2;
+            }
+
+            if(len1.length() > max.length()) {
+                max = len1;
+            }
+        }
+        return max;
+    }
+
+    private static String expandAroundCenter2(String s, int left, int right) {
+        int L = left, R = right;
+        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L--;
+            R++;
+        }
+        return s.substring(L + 1, R);
     }
 
     public static void main(String[] args) {
@@ -122,7 +169,9 @@ public class LongestPalindromicSubstring5 {
 //        String s = "euazbipzncptldueeuechubrcourfpftcebikrxhybkymimgvldiwqvkszfycvqyvtiwfckexmowcxztkfyzqovbtmzpxojfofbvwnncajvrvdbvjhcrameamcfmcoxryjukhpljwszknhiypvyskmsujkuggpztltpgoczafmfelahqwjbhxtjmebnymdyxoeodqmvkxittxjnlltmoobsgzdfhismogqfpfhvqnxeuosjqqalvwhsidgiavcatjjgeztrjuoixxxoznklcxolgpuktirmduxdywwlbikaqkqajzbsjvdgjcnbtfksqhquiwnwflkldgdrqrnwmshdpykicozfowmumzeuznolmgjlltypyufpzjpuvucmesnnrwppheizkapovoloneaxpfinaontwtdqsdvzmqlgkdxlbeguackbdkftzbnynmcejtwudocemcfnuzbttcoew";
 //                 "abacdgfdcaba"
         String s = "abba";
-        System.out.println(longestPalindrome3(s));
+//        System.out.println(isPalind(s, 0, s.length()));
+        System.out.println(longestPalindrome4(s));
         System.out.println(System.currentTimeMillis() - start );
     }
+
 }
