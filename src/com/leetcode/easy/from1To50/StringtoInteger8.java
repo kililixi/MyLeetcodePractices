@@ -16,16 +16,23 @@ package com.leetcode.easy.from1To50;
  */
 public class StringtoInteger8 {
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws Exception {
         StringtoInteger8 leet = new StringtoInteger8();
-        System.out.println(leet.myAtoi2("s"));
+        System.out.println(leet.myAtoi2("-91283472332"));
+        System.out.println(leet.myAtoi("2147483648"));
     }
     public int myAtoi2(String s) {
-        System.out.println(Double.parseDouble("+123.11"));
+        System.out.println(Double.parseDouble("words and 987"));
+        int a = Integer.MIN_VALUE;
+        int b = 2147483647;
+        int c = a-1;
+        int d = b+1;
+        System.out.println(a);   //-2147483648
+        System.out.println("a-1: "+ c);     //2147483647
+        System.out.println("b+1 " + d);     //-2147483648
         return 0;
     }
-    public int myAtoi(String s) {
+    public int myAtoi(String s) throws Exception{
         boolean positive = true;
         int result = 0;
         if(s == null) {
@@ -44,15 +51,21 @@ public class StringtoInteger8 {
             i++;
         }
         for(; i < arr.length; i++) {
-            if((int)arr[i] == 46 ) {
-
-                continue;
-            }
-            if((int)arr[i] <= 9 ) {
-
+            if( (int)arr[i] >= 48 && (int)arr[i] <= 57 ) {
+                // 注意是否超过范围
+                if( positive && (result > Integer.MAX_VALUE/10) ){
+                    result =  Integer.MAX_VALUE;
+                    break;
+                }
+                if( !positive && ( -result < Integer.MIN_VALUE/10) ){
+                    result =  Integer.MIN_VALUE;
+                    break;
+                }
+                result = result * 10 + (arr[i] - 48);
+            } else {
+                break;
             }
         }
-//        System.out.println((int)'.');
-        return 0;
+        return positive ? result : -result;
     }
 }
