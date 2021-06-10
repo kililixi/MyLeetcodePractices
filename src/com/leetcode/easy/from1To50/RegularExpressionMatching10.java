@@ -11,8 +11,8 @@ package com.leetcode.easy.from1To50;
  * https://leetcode.com/problems/regular-expression-matching/
  *
  * 给定一个字符串s 和 模版 p ,判断s是否符合模版
- * '.' Matches any single character.
- * '*' Matches zero or more of the preceding element.
+ * '.' 匹配任意单个字符
+ * '*' 匹配零个或多个前面的那一个元素
  */
 public class RegularExpressionMatching10 {
 
