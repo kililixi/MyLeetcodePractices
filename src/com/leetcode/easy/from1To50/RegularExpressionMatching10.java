@@ -21,13 +21,33 @@ public class RegularExpressionMatching10 {
     public static void main(String[] args) {
 //        String s = "dddfsdfsdf";
 //        String p = "d*fs.fs.f";
-//        String s = "fffsdfsdf";
-//        String p = "f*fsdfsdf";
-        String s = "f";
-        String p = "d";
-
+        String s = "fffsdfsdf";
+        String p = "f*fsdfsdf";
+//        String s = "f";
+//        String p = "d";
+        long start = System.currentTimeMillis();
         System.out.println(new RegularExpressionMatching10().isMatch2(s, p));
+        System.out.println(System.currentTimeMillis()-start);
 
+    }
+
+    public boolean isMatch3(String text, String pattern) {
+        boolean[][] dp = new boolean[text.length() + 1][pattern.length() + 1];
+        dp[text.length()][pattern.length()] = true;
+
+        for (int i = text.length(); i >= 0; i--){
+            for (int j = pattern.length() - 1; j >= 0; j--){
+                boolean first_match = (i < text.length() &&
+                        (pattern.charAt(j) == text.charAt(i) ||
+                                pattern.charAt(j) == '.'));
+                if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
+                    dp[i][j] = dp[i][j+2] || first_match && dp[i+1][j];
+                } else {
+                    dp[i][j] = first_match && dp[i+1][j+1];
+                }
+            }
+        }
+        return dp[0][0];
     }
 
     /**
@@ -43,6 +63,14 @@ public class RegularExpressionMatching10 {
         return dp(0, 0, text, pattern);
     }
 
+    /**
+     * 其实就是前面那个方法的优化，把截取字符串的操作变成了遍历字符串而已，这个memo数组有什么必要呢
+     * @param i
+     * @param j
+     * @param text
+     * @param pattern
+     * @return
+     */
     public boolean dp(int i, int j, String text, String pattern) {
         // 如果之前缓存了该位置的值，直接返回
         if (memo[i][j] != null) {
@@ -56,15 +84,28 @@ public class RegularExpressionMatching10 {
             ans = i == text.length();
         } else{
 
-            // 在i没到text结尾时，通过判断当前各自的第一个字符是否相等，或者pattern为. 来判断第一个字符是否符合
+            // 在i没到text结尾时，通过判断当前各自的第一个字符是否相等，或者pattern为 '.' 来判断第一个字符是否符合
             boolean first_match = (i < text.length() &&
                     (pattern.charAt(j) == text.charAt(i) ||
                             pattern.charAt(j) == '.'));
 
+            // 在对比到 pattern 为 'x*' 时，【类似前面那个递归方法种的  如果pattern还剩2，并且第2个是*（匹配零个或多个前面的那一个元素）】
             if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
+
+                /**
+                 * 如果
+                 * 1、忽略pattern前面两个匹配符(pattern.substring(2))
+                 * 这种情况代表匹配了0个字符，比如 s=fsdfsdf p=d*fsdfsdf,即删了你这部分正则也不影响
+                 *
+                 * 2、忽略已经符合匹配的text（通过first_match判断）
+                 * 这种情况代表匹配了>=1个text, 比如s=fffsdfsdf p=f*fsdfsdf,删除第一个匹配的字符，pattern不变，继续匹配。
+                 *
+                 * 以上两个操作结果有一个true的话，代表符合该正则。
+                 */
                 ans = (dp(i, j+2, text, pattern) ||
                         first_match && dp(i+1, j, text, pattern));
             } else {
+                // 没有*的情况下，pattern和 text同时取下一位比较
                 ans = first_match && dp(i+1, j+1, text, pattern);
             }
         }
