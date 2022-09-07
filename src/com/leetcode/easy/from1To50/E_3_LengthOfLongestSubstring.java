@@ -10,7 +10,7 @@ import java.util.Set;
  *
  * 给定一个字符串，找出最长的不重复的段落
  */
-public class LengthOfLongestSubstring3 {
+public class E_3_LengthOfLongestSubstring {
 
     /**
      * 时间复杂度： O(n^2)

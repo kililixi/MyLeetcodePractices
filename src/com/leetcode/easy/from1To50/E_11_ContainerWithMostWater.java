@@ -1,7 +1,5 @@
 package com.leetcode.easy.from1To50;
 
-import java.util.Arrays;
-
 /**
  * https://leetcode.com/problems/container-with-most-water/
  * 给定一个长度为 n 的整数数组height。有n条垂线，第 i 条线的两个端点是(i, 0)和(i, height[i])。
@@ -14,7 +12,7 @@ import java.util.Arrays;
  * 链接：https://leetcode-cn.com/problems/container-with-most-water
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class ContainerWithMostWater11 {
+public class E_11_ContainerWithMostWater {
 
     /**
      * 暴力循环

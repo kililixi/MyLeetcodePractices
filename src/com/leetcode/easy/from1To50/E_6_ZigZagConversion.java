@@ -13,7 +13,7 @@ import java.util.List;
  * Y   I   R
  * And then read line by line: "PAHNAPLSIIGYIR"
  */
-public class ZigZagConversion6 {
+public class E_6_ZigZagConversion {
 
     public static String convert(String s, int numRows) {
         if(numRows == 1) {

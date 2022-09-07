@@ -2,7 +2,7 @@ package com.leetcode.easy.from1To50;
 
 import java.util.*;
 
-public class ThreeSum15 {
+public class E_15_ThreeSum {
 
     /**
      * 暴力

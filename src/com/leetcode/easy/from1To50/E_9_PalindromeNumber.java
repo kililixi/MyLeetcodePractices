@@ -12,7 +12,7 @@ package com.leetcode.easy.from1To50;
  *
  * 给定一个数字，如果是回文返回true 不是返回false
  */
-public class PalindromeNumber9 {
+public class E_9_PalindromeNumber {
 
     public static void main(String[] args) {
         System.out.println(isPalindrome2(10));

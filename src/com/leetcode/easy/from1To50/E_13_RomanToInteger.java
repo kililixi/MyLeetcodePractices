@@ -1,11 +1,20 @@
 package com.leetcode.easy.from1To50;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RomanToInteger13 {
+/**
+ * https://leetcode.com/problems/roman-to-integer/
+ * 罗马字到数字
+ *
+ */
+public class E_13_RomanToInteger {
 
+    /**
+     * 从字符串末尾开始，先计算两位，有两位符合罗马字母组合就当做是两位，否则当作1位
+     * @param roman
+     * @return
+     */
     public static int romanToInt(String roman) {
         Map<String, Integer> config = new HashMap<>();
         config.put("M", 1000);
@@ -74,6 +83,12 @@ public class RomanToInteger13 {
         return result;
     }
 
+    /**
+     * 计算有几个字符串,少掉的长度/替换字符的长度
+     * @param str
+     * @param subStr
+     * @return
+     */
     private static int countStr(String str, String subStr) {
         String temp = str.replace(subStr, "");
         int occ = (str.length() - temp.length()) / subStr.length();
@@ -82,6 +97,6 @@ public class RomanToInteger13 {
 
     public static void main(String[] args) {
         
-        System.out.print(romanToInt2("LVIII"));
+        System.out.print(romanToInt("LVIII"));
     }
 }

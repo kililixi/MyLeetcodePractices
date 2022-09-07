@@ -11,7 +11,7 @@ import java.util.Map;
  * 使用哈希表，循环的时候把 target-当前值 作为key, 下标作为 value；如果 下次循环时的 (target-当前值)存在于哈希表中，则根据下标(value)取对应的值
  *
  */
-public class TwoSum1 {
+public class E_1_TwoSum {
     public static int[] twoSum(int[] nums, int target) {
 
         Map<Integer, Integer> result = new HashMap<>();

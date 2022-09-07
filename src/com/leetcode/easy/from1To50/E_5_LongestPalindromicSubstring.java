@@ -5,7 +5,7 @@ package com.leetcode.easy.from1To50;
  *
  * 给定一个字符串，返回最长的回文
  */
-public class LongestPalindromicSubstring5 {
+public class E_5_LongestPalindromicSubstring {
 
     private static int count;
 

@@ -14,10 +14,10 @@ package com.leetcode.easy.from1To50;
  * ASCII + = 43
  * ASCII . = 46
  */
-public class StringtoInteger8 {
+public class E_8_StringtoInteger {
 
     public static void main(String[] args) throws Exception {
-        StringtoInteger8 leet = new StringtoInteger8();
+        E_8_StringtoInteger leet = new E_8_StringtoInteger();
 //        System.out.println(leet.test());
         System.out.println(leet.myAtoi2("21474836491"));
 //        System.out.println(leet.myAtoi2("2147483648"));

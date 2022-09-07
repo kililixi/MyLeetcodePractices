@@ -1,12 +1,17 @@
 package com.leetcode.easy.from1To50;
 
-import java.util.Arrays;
-
-public class LongestCommonPrefix14 {
+/**
+ * https://leetcode.com/problems/longest-common-prefix/
+ *
+ * 超出最长的共有前缀字符
+ */
+public class E_14_LongestCommonPrefix {
 
     /**
-     * 线找到最短的那个，以最短的为准，再多也不会超过最短的.
-     * 从小到大一个个比
+     * 只是找前缀，那先找到最短的那个，以最短的为准，再多也不会超过最短的.
+     * 从小到大一个个比，如
+     * [abc, abcd, abcdef]
+     * 从a 到 ab 到 abc
      * @param strs
      * @return
      */

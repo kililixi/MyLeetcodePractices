@@ -5,7 +5,7 @@ package com.leetcode.easy.from1To50;
  *
  * 数字转罗马字符 1 <= num <= 3999
  */
-public class IntegerToRoman12 {
+public class E_12_IntegerToRoman {
 
     public static String intToRoman(int num) {
         String roman = "";

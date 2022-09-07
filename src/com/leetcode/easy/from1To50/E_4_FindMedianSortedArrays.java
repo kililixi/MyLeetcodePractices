@@ -1,12 +1,11 @@
 package com.leetcode.easy.from1To50;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
  * https://leetcode.com/problems/median-of-two-sorted-arrays/
  */
-public class FindMedianSortedArrays4 {
+public class E_4_FindMedianSortedArrays {
 
     /**
      * 思路，合并两个数组。调用数组的方法排序，然后直接获取中间的数字

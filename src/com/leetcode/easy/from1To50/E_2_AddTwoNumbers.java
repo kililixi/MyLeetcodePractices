@@ -8,7 +8,7 @@ package com.leetcode.easy.from1To50;
  * Output: [7,0,8]
  * Explanation: 342 + 465 = 807.
  */
-public class AddTwoNumbers2 {
+public class E_2_AddTwoNumbers {
 
     /**
      * 思路： 把结果也当初一个链表，然后把两个链表相同位的数据相加，把结果赋给结果链表，如果有进位就+1

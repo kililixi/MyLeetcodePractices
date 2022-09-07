@@ -14,7 +14,7 @@ package com.leetcode.easy.from1To50;
  * '.' 匹配任意单个字符
  * '*' 匹配零个或多个前面的那一个元素
  */
-public class RegularExpressionMatching10 {
+public class E_10_RegularExpressionMatching {
 
     Result[][] memo;
 
@@ -28,7 +28,7 @@ public class RegularExpressionMatching10 {
 //        String s = "a*a*a*";
 //        String p = "aaaaabc";
         long start = System.currentTimeMillis();
-        System.out.println(new RegularExpressionMatching10().isMatch3(s, p));
+        System.out.println(new E_10_RegularExpressionMatching().isMatch3(s, p));
         System.out.println(System.currentTimeMillis()-start);
 
     }

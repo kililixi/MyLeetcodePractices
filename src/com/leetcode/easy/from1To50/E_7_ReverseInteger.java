@@ -14,7 +14,7 @@ package com.leetcode.easy.from1To50;
  * Input: x = 120
  * Output: 21
  */
-public class ReverseInteger7 {
+public class E_7_ReverseInteger {
 
     /**
      * 将数字转成字符串，借助 StringBuilder的reverse 方法转向，再判断转化前的数字是否是负数
