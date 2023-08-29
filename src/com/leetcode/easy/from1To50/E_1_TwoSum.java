@@ -8,7 +8,9 @@ import java.util.Map;
  * https://leetcode.com/problems/two-sum/
  * 给一组数字和一个target，返回两个加起来等于target的数字，假定只有一个结果，并且同一个数字不能用两次。
  *
- * 使用哈希表，循环的时候把 target-当前值 作为key, 下标作为 value；如果 下次循环时的 (target-当前值)存在于哈希表中，则根据下标(value)取对应的值
+ * 使用哈希表存数字数组，值作为key,数组下标作为value，这样可以通过 target-当前值 来简单获取另一个值的下标。
+ * 循环数字数组的时候如果target-当前值（当前数字期望的值）在hash中，则获取当前下标和hash的value作为结果返回；
+ * 如果不存在，当前值作为key, 数组下标作为value存入hash中。
  *
  */
 public class E_1_TwoSum {
